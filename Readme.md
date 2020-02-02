@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Вадим Комков](https://up.htmlacademy.ru/javascript/19/user/1125989).
-* Наставник: `Неизвестно`.
+* Наставник: [Светлана Корякина](https://htmlacademy.ru/profile/id477401).
 
 ---
 
