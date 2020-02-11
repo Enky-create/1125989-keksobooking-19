@@ -25,7 +25,7 @@ var getRandomInArray = function (array) {
 
 var getRandomPin = function (index) {
   index++;
-  var xMinus = 50;
+  var xMinus = 25;
   var yMinus = 70;
   var pin = {
   "author": {
