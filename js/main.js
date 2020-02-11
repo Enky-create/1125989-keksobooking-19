@@ -20,18 +20,18 @@ var photos = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
 
-var getRandomInRange = function(min, max) {
+var getRandomInRange = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var getRandomInArray = function(array) {
+var getRandomInArray = function (array) {
   var min = 0;
   var max = array.length - 1;
   var index = Math.floor(Math.random() * (max - min + 1)) + min;
   return array[index];
 };
 
-var getRandomPin = function(index) {
+var getRandomPin = function (index) {
   index++;
   var xMinus = 25;
   var yMinus = 70;
