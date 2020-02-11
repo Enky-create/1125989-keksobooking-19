@@ -20,7 +20,7 @@ var getRandomInArray = function (array) {
   var min = 0;
   var max = array.length - 1;
   var index = Math.floor(Math.random() * (max - min + 1)) + min;
-  return index;
+  return array[index];
 };
 
 var getRandomPin = function (index) {
