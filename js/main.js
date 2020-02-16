@@ -93,10 +93,10 @@ var randomHtmlPin = function (counter) {
 };
 
 var doActiveSite = function () {
-  arrayPin = [];
   var map = document.querySelector('.map');
   map.classList.remove('map--faded');
   var pins = document.querySelector('.map__pins');
+  pins.innerHTML = '';
   pins.appendChild(randomHtmlPin(PINS_QUANTITY));
   for (var i = 0; i < fieldsets.length; i++) {
     fieldsets[i].removeAttribute('disabled');
