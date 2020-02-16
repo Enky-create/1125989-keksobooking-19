@@ -96,7 +96,10 @@ var doActiveSite = function () {
   var map = document.querySelector('.map');
   map.classList.remove('map--faded');
   var pins = document.querySelector('.map__pins');
-  pins.innerHTML = '';
+  var nested = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+  for (var i = 0; i < nested.length; i++) {
+    pins.removeChild(nested[i]);
+  }
   pins.appendChild(randomHtmlPin(PINS_QUANTITY));
   for (var i = 0; i < fieldsets.length; i++) {
     fieldsets[i].removeAttribute('disabled');
