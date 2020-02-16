@@ -4,8 +4,8 @@ var MUFFIN_TALE_HEIGHT = 22;
 var PINS_QUANTITY = 8;
 var MAX_Y = 630;
 var MIN_Y = 130;
-var MIN_X = 0;
-var MAX_X = document.querySelector('.map').offsetWidth;
+var MIN_X = 25;
+var MAX_X = document.querySelector('.map').offsetWidth - 25;
 var types = ['palace', 'flat', 'house', 'bungalo'];
 var checkinsCheckouts = ['12:00', '13:00', '14:00'];
 var features = [
@@ -49,13 +49,15 @@ var getRandomPin = function (index) {
   index++;
   var xMinus = 25;
   var yMinus = 70;
+  var xCoordinate = getRandomInRange(MIN_X, MAX_X) - xMinus;
+  var yCoordinate = getRandomInRange(MIN_Y, MAX_Y) - yMinus;
   var pin = {
     author: {
       avatar: 'img/avatars/user0' + index + '.png'
     },
     offer: {
       title: 'Сдам',
-      address: x + ' ,' + y,
+      address: xCoordinate + ' ,' + yCoordinate,
       price: getRandomInRange(10000, 50000),
       type: getRandomInArray(types),
       rooms: getRandomInRange(1, 10),
@@ -68,8 +70,8 @@ var getRandomPin = function (index) {
     },
 
     location: {
-      x: x,
-      y: y
+      x: xCoordinate,
+      y: yCoordinate
     }
   };
   return pin;
@@ -126,6 +128,7 @@ var pinMousedownHandler = function (evt) {
 };
 
 var pinClickHandler = function () {
+  arrayPin = [];
   doActiveSite(fieldsets, filters);
   y = y + MUFFIN_TALE_HEIGHT + MUFFIN_RADIUS;
   addressInput.value = x + ', ' + y;
@@ -137,7 +140,7 @@ var formSubmitHandler = function (evt) {
 
 var inputChangeHandler = function () {
   roomNumber.setCustomValidity('');
-  if (+roomNumber.value < +capacity.value && +capacity.value > 0) { // && +capacity.value > 0) || (+roomNumber.value === 100 && +capacity.value !== 0)) {
+  if (+roomNumber.value < +capacity.value && +capacity.value > 0) {
     roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
   }
   if (+capacity.value === 0 && +roomNumber.value !== 100) {
