@@ -49,8 +49,6 @@ var getRandomPin = function (index) {
   index++;
   var xMinus = 25;
   var yMinus = 70;
-  var x = getRandomInRange(MIN_X, MAX_X) - xMinus;
-  var y = getRandomInRange(MIN_Y, MAX_Y) - yMinus;
   var pin = {
     author: {
       avatar: 'img/avatars/user0' + index + '.png'
