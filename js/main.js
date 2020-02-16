@@ -25,6 +25,14 @@ var roomNumber = document.querySelector('#room_number');
 var capacity = document.querySelector('#capacity');
 var form = document.querySelector('.ad-form');
 var arrayPin = [];
+var filters = document.querySelector('.map__filters');
+var fieldsets = document.querySelectorAll('fieldset');
+var addressInput = document.querySelector('#address');
+var mapPinMain = document.querySelector('.map__pin--main');
+var xString = mapPinMain.style.left.replace('px', '');
+var yString = mapPinMain.style.top.replace('px', '');
+var x = parseInt(xString, 10) + MUFFIN_RADIUS;
+var y = parseInt(yString, 10) + MUFFIN_RADIUS;
 
 var getRandomInRange = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -84,12 +92,8 @@ var randomHtmlPin = function (counter) {
   return fragment;
 };
 
-/* var map = document.querySelector('.map');
-map.classList.remove('map--faded');
-var pins = document.querySelector('.map__pins');
-pins.appendChild(randomHtmlPin(PINS_QUANTITY));*/
-
-var doActiveSite = function (fieldsets, filters) {
+var doActiveSite = function () {
+  arrayPin = [];
   var map = document.querySelector('.map');
   map.classList.remove('map--faded');
   var pins = document.querySelector('.map__pins');
@@ -97,47 +101,37 @@ var doActiveSite = function (fieldsets, filters) {
   for (var i = 0; i < fieldsets.length; i++) {
     fieldsets[i].removeAttribute('disabled');
   }
-  var form = document.querySelector('.ad-form');
   form.classList.remove('ad-form--disabled');
   filters.classList.remove('ad-form--disabled');
 };
 
-var fieldsets = document.querySelectorAll('fieldset');
-for (var i = 0; i < fieldsets.length; i++) {
-  fieldsets[i].setAttribute('disabled', 'disabled');
-}
-var filters = document.querySelector('.map__filters');
-filters.classList.add('ad-form--disabled');
+var init = function () {
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].setAttribute('disabled', 'disabled');
+  }
+  addressInput.value = x + ', ' + y;
 
-var addressInput = document.querySelector('#address');
-var mapPinMain = document.querySelector('.map__pin--main');
-var xString = mapPinMain.style.left.replace('px', '');
-var yString = mapPinMain.style.top.replace('px', '');
-var x = parseInt(xString, 10) + MUFFIN_RADIUS;
-var y = parseInt(yString, 10) + MUFFIN_RADIUS;
+
+  filters.classList.add('ad-form--disabled');
+  if (+roomNumber.value < +capacity.value) {
+    roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
+  }
+};
 
 
 var pinMousedownHandler = function (evt) {
-  if (evt.which === 1) {
+  if (evt.button === 0) {
     doActiveSite(fieldsets, filters);
-    y = y + MUFFIN_TALE_HEIGHT;
+    y = y + MUFFIN_TALE_HEIGHT + MUFFIN_RADIUS;
     addressInput.value = x + ', ' + y;
-    mapPinMain.removeEventListener('mousedown', pinMousedownHandler);
   }
 };
 
-var pinKeydownHandler = function (evt) {
-  if (evt.key === 'Enter') {
-    doActiveSite(fieldsets, filters);
-    y = y + MUFFIN_TALE_HEIGHT;
-    addressInput.value = x + ', ' + y;
-    mapPinMain.removeEventListener('keydown', pinKeydownHandler);
-  }
+var pinClickHandler = function () {
+  doActiveSite(fieldsets, filters);
+  y = y + MUFFIN_TALE_HEIGHT + MUFFIN_RADIUS;
+  addressInput.value = x + ', ' + y;
 };
-
-mapPinMain.addEventListener('mousedown', pinMousedownHandler);
-mapPinMain.addEventListener('keydown', pinKeydownHandler);
-addressInput.value = x + ', ' + y;
 
 var formSubmitHandler = function (evt) {
   evt.preventDefault();
@@ -157,6 +151,6 @@ var inputChangeHandler = function () {
 form.addEventListener('submit', formSubmitHandler);
 roomNumber.addEventListener('change', inputChangeHandler);
 capacity.addEventListener('change', inputChangeHandler);
-if (+roomNumber.value < +capacity.value) {
-  roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
-}
+mapPinMain.addEventListener('mousedown', pinMousedownHandler);
+mapPinMain.addEventListener('click', pinClickHandler);
+init();
