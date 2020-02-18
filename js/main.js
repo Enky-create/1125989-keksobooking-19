@@ -168,13 +168,18 @@ var doCard = function () {
   var time = cloneCard.querySelector('.popup__text--time');
   time.textContent = 'Заезд после ' + arrayPin[0].offer.checkin + ', выезд до ' + arrayPin[0].offer.checkout;
   var featuresList = cloneCard.querySelector('.popup__features');
-  var featureArray = featuresList.querySelectorAll('popup__feature');
+  var featureArray = featuresList.querySelectorAll('.popup__feature');
   for (var i = 0; i < featureArray.length; i++) {
     var classes = featureArray[i].classList;
+    var flag = false;
     for (var j = 0; j < classes.length; j++) {
-      if (classes[j].includes(arrayPin[0].offer.features)) {
-        featureArray[i].textContent = arrayPin[0].offer.features;
+      flag = false;
+      if (!(classes[j].includes(arrayPin[0].offer.features))) {
+        flag = true;
       }
+    }
+    if (flag) {
+      featureArray[i].remove();
     }
   }
   var description = cloneCard.querySelector('.popup__description');
