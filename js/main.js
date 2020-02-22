@@ -180,19 +180,21 @@ var doCard = function (index) {
   var address = cloneCard.querySelector('.popup__text--address');
   address.textContent = arrayPin[index].offer.address;
   var type = cloneCard.querySelector('.popup__type');
-  type.textContent = arrayPin[index].offer.type;
+  type.textContent = dictinary[arrayPin[index].offer.type];
   var textCapacity = cloneCard.querySelector('.popup__text--capacity');
   textCapacity.textContent = arrayPin[index].offer.rooms + ' комнаты для ' + arrayPin[index].offer.guests + ' гостей';
   var time = cloneCard.querySelector('.popup__text--time');
   time.textContent = 'Заезд после ' + arrayPin[index].offer.checkin + ', выезд до ' + arrayPin[index].offer.checkout;
+
   var featuresList = cloneCard.querySelector('.popup__features');
   featuresList.innerHTML = '';
   for (var i = 0; i < arrayPin[index].offer.features.length; i++) {
-    var feature = getNewElement('li', 'popup__feature popup__feature--' + getRandomInArray(arrayPin[index].offer.features));
+    var feature = getNewElement('li', 'popup__feature popup__feature--' + arrayPin[index].offer.features[i]);
     featuresList.appendChild(feature);
   }
   var description = cloneCard.querySelector('.popup__description');
   description.textContent = arrayPin[index].offer.description;
+
   var photo = cloneCard.querySelector('.popup__photos');
   photo.innerHTML = '';
   for (var i = 0; i < arrayPin[index].offer.photos.length; i++) {
