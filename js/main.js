@@ -6,9 +6,9 @@ var MAX_Y = 630;
 var MIN_Y = 130;
 var MIN_X = 25;
 var MAX_X = document.querySelector('.map').offsetWidth - 25;
-var types = ['palace', 'flat', 'house', 'bungalo'];
-var checkinsCheckouts = ['12:00', '13:00', '14:00'];
-var features = [
+var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var CHECKIN_CHECKOUT = ['12:00', '13:00', '14:00'];
+var FEATURES = [
   'wifi',
   'dishwasher',
   'parking',
@@ -16,7 +16,7 @@ var features = [
   'elevator',
   'conditioner'
 ];
-var photos = [
+var PHOTO = [
   'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
@@ -36,7 +36,7 @@ var y = parseInt(yString, 10) + MUFFIN_RADIUS;
 var dictinary = {
   flat: 'Квартира',
   bungalo: 'Бунгало',
-  house: 'Дом ',
+  house: 'Дом',
   palace: 'Дворец '
 };
 var getRandomInRange = function (min, max) {
@@ -46,7 +46,7 @@ var getRandomInRange = function (min, max) {
 var getRandomInArray = function (array) {
   var min = 0;
   var max = array.length - 1;
-  var index = Math.floor(Math.random() * (max - min + 1)) + min;
+  var index = getRandomInRange(min, max);
   return array[index];
 };
 
@@ -73,14 +73,14 @@ var getRandomPin = function (index) {
       title: 'Сдам',
       address: xCoordinate + ' ,' + yCoordinate,
       price: getRandomInRange(10000, 50000),
-      type: getRandomInArray(types),
+      type: getRandomInArray(TYPES),
       rooms: getRandomInRange(1, 10),
       guests: getRandomInRange(1, 10),
-      checkin: getRandomInArray(checkinsCheckouts),
-      checkout: getRandomInArray(checkinsCheckouts),
-      features: getRandomArray(features),
+      checkin: getRandomInArray(CHECKIN_CHECKOUT),
+      checkout: getRandomInArray(CHECKIN_CHECKOUT),
+      features: getRandomArray(FEATURES),
       description: 'строка с описанием',
-      photos: getRandomArray(photos)
+      photos: getRandomArray(PHOTO)
     },
 
     location: {
@@ -127,8 +127,6 @@ var init = function () {
     fieldsets[i].setAttribute('disabled', 'disabled');
   }
   addressInput.value = x + ', ' + y;
-
-
   filters.classList.add('ad-form--disabled');
   if (+roomNumber.value < +capacity.value) {
     roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
@@ -174,42 +172,43 @@ var doCard = function (index) {
   var cardTemplate = document.querySelector('#card').content.querySelector('article');
   var cloneCard = cardTemplate.cloneNode(true);
   var title = cloneCard.querySelector('.popup__title');
-  title.textContent = arrayPin[index].offer.title;
   var price = cloneCard.querySelector('.popup__text--price');
-  price.textContent = arrayPin[index].offer.price + ' ₽/ночь';
   var address = cloneCard.querySelector('.popup__text--address');
-  address.textContent = arrayPin[index].offer.address;
   var type = cloneCard.querySelector('.popup__type');
-  type.textContent = dictinary[arrayPin[index].offer.type];
   var textCapacity = cloneCard.querySelector('.popup__text--capacity');
-  textCapacity.textContent = arrayPin[index].offer.rooms + ' комнаты для ' + arrayPin[index].offer.guests + ' гостей';
   var time = cloneCard.querySelector('.popup__text--time');
-  time.textContent = 'Заезд после ' + arrayPin[index].offer.checkin + ', выезд до ' + arrayPin[index].offer.checkout;
-
   var featuresList = cloneCard.querySelector('.popup__features');
+  var description = cloneCard.querySelector('.popup__description');
+  var photo = cloneCard.querySelector('.popup__photos');
+  var avatar = cloneCard.querySelector('.popup__avatar');
+  var fragment = document.createDocumentFragment();
+  var map = document.querySelector('.map');
+
+  title.textContent = arrayPin[index].offer.title;
+  price.textContent = arrayPin[index].offer.price + ' ₽/ночь';
+  address.textContent = arrayPin[index].offer.address;
+  type.textContent = dictinary[arrayPin[index].offer.type];
+  textCapacity.textContent = arrayPin[index].offer.rooms + ' комнаты для ' + arrayPin[index].offer.guests + ' гостей';
+  time.textContent = 'Заезд после ' + arrayPin[index].offer.checkin + ', выезд до ' + arrayPin[index].offer.checkout;
+  description.textContent = arrayPin[index].offer.description;
+
   featuresList.innerHTML = '';
   for (var i = 0; i < arrayPin[index].offer.features.length; i++) {
     var feature = getNewElement('li', 'popup__feature popup__feature--' + arrayPin[index].offer.features[i]);
     featuresList.appendChild(feature);
   }
-  var description = cloneCard.querySelector('.popup__description');
-  description.textContent = arrayPin[index].offer.description;
 
-  var photo = cloneCard.querySelector('.popup__photos');
   photo.innerHTML = '';
-  for (var i = 0; i < arrayPin[index].offer.photos.length; i++) {
+  for (var a = 0; a < arrayPin[index].offer.photos.length; a++) {
     var image = getNewElement('img', 'popup__photo');
-    image.src = arrayPin[index].offer.photos[i];
+    image.src = arrayPin[index].offer.photos[a];
     image.alt = 'Фотография жилья';
     image.width = 45;
     image.height = 40;
     photo.appendChild(image);
   }
-  var avatar = cloneCard.querySelector('.popup__avatar');
   avatar.src = arrayPin[index].author.avatar;
-  var fragment = document.createDocumentFragment();
   fragment.appendChild(cloneCard);
-  var map = document.querySelector('.map');
   map.insertBefore(fragment, cloneCard.querySelector('.map__filters-container'));
 };
 
