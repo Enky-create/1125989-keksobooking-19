@@ -20,7 +20,7 @@
     }
 
     window.data.fillData();
-    pins.appendChild(window.pin.randomHtmlPin(window.constant.PINS_QUANTITY));
+    pins.appendChild(window.pin.newPin(window.constant.PINS_QUANTITY));
     for (var b = 0; b < fieldsets.length; b++) {
       fieldsets[b].removeAttribute('disabled');
     }
@@ -38,8 +38,8 @@
   };
 
   var pinClickHandler = function () {
-    window.card.show(0);
     activate(fieldsets, filters);
+    window.card.show(0);
     addressInput.value = x + ', ' + y;
   };
 
