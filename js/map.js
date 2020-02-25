@@ -35,9 +35,9 @@
   };
 
   var pinClickHandler = function () {
+    window.card.show(0);
     window.pin.arrayPin = [];
     doActiveSite(fieldsets, filters);
-    window.card.doCard(0);
     y = y + window.constant.MUFFIN_TALE_HEIGHT + window.constant.MUFFIN_RADIUS;
     addressInput.value = x + ', ' + y;
   };
