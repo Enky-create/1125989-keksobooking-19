@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var arrayPin = [];
   var getRandomInRange = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -18,11 +19,6 @@
       newArray[i] = array[i];
     }
     return newArray;
-  };
-  var getNewElement = function (tag, className) {
-    var element = document.createElement(tag);
-    element.className = className;
-    return element;
   };
   var getRandomPin = function (index) {
     index++;
@@ -56,8 +52,10 @@
     };
     return pin;
   };
+  for (var a = 0; a < window.constant.PINS_QUANTITY; a++) {
+    arrayPin[a] = getRandomPin(a);
+  }
   window.data = {
-    getRandomPin: getRandomPin,
-    getNewElement: getNewElement
+    arrayPin: arrayPin
   };
 })();

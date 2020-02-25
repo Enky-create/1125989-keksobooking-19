@@ -1,7 +1,12 @@
 'use strict';
 (function () {
+  var getNewElement = function (tag, className) {
+    var element = document.createElement(tag);
+    element.className = className;
+    return element;
+  };
   var show = function (index) {
-    var arrayPin = window.pin.arrayPin;
+    var arrayPin = window.data.arrayPin;
     var cardTemplate = document.querySelector('#card').content.querySelector('article');
     var cloneCard = cardTemplate.cloneNode(true);
     var title = cloneCard.querySelector('.popup__title');
@@ -32,13 +37,13 @@
 
     featuresList.innerHTML = '';
     for (var i = 0; i < arrayPin[index].offer.features.length; i++) {
-      var feature = window.data.getNewElement('li', 'popup__feature popup__feature--' + arrayPin[index].offer.features[i]);
+      var feature = getNewElement('li', 'popup__feature popup__feature--' + arrayPin[index].offer.features[i]);
       featuresList.appendChild(feature);
     }
 
     photo.innerHTML = '';
     for (var a = 0; a < arrayPin[index].offer.photos.length; a++) {
-      var image = window.data.getNewElement('img', 'popup__photo');
+      var image = getNewElement('img', 'popup__photo');
       image.src = arrayPin[index].offer.photos[a];
       image.alt = 'Фотография жилья';
       image.width = 45;
