@@ -9,7 +9,7 @@
 
   var inputChangeHandler = function () {
     roomNumber.setCustomValidity('');
-    if (+roomNumber.value < +capacity.value && +capacity.value > 0) {
+    if (+roomNumber.value < +capacity.value && +capacity.value > 0 || +roomNumber.value === 100 && +capacity.value !== 0) {
       roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
     }
     if (+capacity.value === 0 && +roomNumber.value !== 100) {

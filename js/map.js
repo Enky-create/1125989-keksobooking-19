@@ -19,7 +19,7 @@
       pins.removeChild(nested[i]);
     }
 
-    pins.appendChild(window.pin.randomHtmlPin(window.data.PINS_QUANTITY));
+    pins.appendChild(window.pin.randomHtmlPin(window.constant.PINS_QUANTITY));
     for (var b = 0; b < fieldsets.length; b++) {
       fieldsets[b].removeAttribute('disabled');
     }
