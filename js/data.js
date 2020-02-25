@@ -57,9 +57,6 @@
     return pin;
   };
   window.data = {
-    getRandomInRange: getRandomInRange,
-    getRandomArray: getRandomArray,
-    getRandomInArray: getRandomInArray,
     getRandomPin: getRandomPin,
     getNewElement: getNewElement
   };
