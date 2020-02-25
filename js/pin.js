@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  var pin = window.data.arrayPin;
+  var pin = window.data.get();
   var randomHtmlPin = function (counter) {
     var htmlPin = document.querySelector('#pin').content.querySelector('button');
     var fragment = document.createDocumentFragment();

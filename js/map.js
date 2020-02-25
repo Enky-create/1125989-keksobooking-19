@@ -19,6 +19,7 @@
       pins.removeChild(nested[i]);
     }
 
+    window.data.fillData();
     pins.appendChild(window.pin.randomHtmlPin(window.constant.PINS_QUANTITY));
     for (var b = 0; b < fieldsets.length; b++) {
       fieldsets[b].removeAttribute('disabled');

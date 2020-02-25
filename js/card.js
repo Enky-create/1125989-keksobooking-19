@@ -6,7 +6,7 @@
     return element;
   };
   var show = function (index) {
-    var arrayPin = window.data.arrayPin;
+    var arrayPin = window.data.get();
     var cardTemplate = document.querySelector('#card').content.querySelector('article');
     var cloneCard = cardTemplate.cloneNode(true);
     var title = cloneCard.querySelector('.popup__title');

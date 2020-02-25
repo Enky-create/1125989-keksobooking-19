@@ -52,10 +52,16 @@
     };
     return pin;
   };
-  for (var a = 0; a < window.constant.PINS_QUANTITY; a++) {
-    arrayPin[a] = getRandomPin(a);
-  }
+  var fillData = function () {
+    for (var a = 0; a < window.constant.PINS_QUANTITY; a++) {
+      arrayPin[a] = getRandomPin(a);
+    }
+  };
+  var get = function () {
+    return arrayPin;
+  };
   window.data = {
-    arrayPin: arrayPin
+    fillData: fillData,
+    get: get
   };
 })();
