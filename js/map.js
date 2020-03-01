@@ -43,7 +43,6 @@
   };
 
   var mapClickHandler = function (evt) {
-    debugger;
     var target = evt.target;
     var number = target.className.match(/number_/);
     if (number) {
