@@ -8,9 +8,9 @@
   var yString = mapPinMain.style.top.replace('px', '');
   var x = parseInt(xString, 10) + window.constant.MUFFIN_RADIUS;
   var y = parseInt(yString, 10) + window.constant.MUFFIN_RADIUS;
+  var map = document.querySelector('.map');
+  var pins = document.querySelector('.map__pins');
   var activate = function () {
-    var map = document.querySelector('.map');
-    var pins = document.querySelector('.map__pins');
     var nested = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     var form = document.querySelector('.ad-form');
 
@@ -39,10 +39,19 @@
 
   var pinClickHandler = function () {
     activate(fieldsets, filters);
-    window.card.show(0);
     addressInput.value = x + ', ' + y;
   };
 
+  var mapClickHandler = function (evt) {
+    debugger;
+    var target = evt.target;
+    var number = target.className.match(/number_/);
+    if (number) {
+      var index = target.className[number.index + 7];
+      window.card.show(parseInt(index, 10));
+    }
+  };
+  pins.addEventListener('click', mapClickHandler);
   mapPinMain.addEventListener('mousedown', pinMousedownHandler);
   mapPinMain.addEventListener('click', pinClickHandler);
 })();

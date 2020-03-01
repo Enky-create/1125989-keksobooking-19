@@ -10,6 +10,7 @@
       clonePin.querySelector('img').alt = pin[i].offer.title;
       clonePin.style.left = pin[i].location.x + 'px';
       clonePin.style.top = pin[i].location.y + 'px';
+      clonePin.classList.add('number_' + i);
       fragment.appendChild(clonePin);
     }
     return fragment;
