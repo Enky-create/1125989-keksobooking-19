@@ -8,9 +8,9 @@
   var yString = mapPinMain.style.top.replace('px', '');
   var x = parseInt(xString, 10) + window.constant.MUFFIN_RADIUS;
   var y = parseInt(yString, 10) + window.constant.MUFFIN_RADIUS;
+  var map = document.querySelector('.map');
+  var pins = document.querySelector('.map__pins');
   var activate = function () {
-    var map = document.querySelector('.map');
-    var pins = document.querySelector('.map__pins');
     var nested = document.querySelectorAll('.map__pin:not(.map__pin--main)');
     var form = document.querySelector('.ad-form');
 
@@ -39,10 +39,44 @@
 
   var pinClickHandler = function () {
     activate(fieldsets, filters);
-    window.card.show(0);
     addressInput.value = x + ', ' + y;
   };
-
+  var crossClickHandler = function () {
+    var popup = map.querySelector('.popup');
+    var cross = map.querySelector('.popup__close');
+    popup.remove();
+    cross.removeEventListener('click', crossClickHandler);
+    document.removeEventListener('keydown', documentKeyDownHandler);
+  };
+  var documentKeyDownHandler = function (evt) {
+    if (evt.key === 'Escape') {
+      var popup = map.querySelector('.popup');
+      popup.remove();
+      document.removeEventListener('keydown', documentKeyDownHandler);
+    }
+  };
+  var pinsKeyDownHandler = function (evt) {
+    var target = evt.target;
+    if (evt.key === 'Enter') {
+      var index = target.children[0].dataset.indexNumber;
+      window.card.show(index);
+      var cross = map.querySelector('.popup__close');
+      cross.addEventListener('click', crossClickHandler);
+      document.addEventListener('keydown', documentKeyDownHandler);
+    }
+  };
+  var pinsClickHandler = function (evt) {
+    var target = evt.target;
+    if (target.tagName === 'IMG' && (target.parentElement.className.indexOf('map__pin--main') < 0)) {
+      var index = target.dataset.indexNumber;
+      window.card.show(index);
+      var cross = map.querySelector('.popup__close');
+      cross.addEventListener('click', crossClickHandler);
+      document.addEventListener('keydown', documentKeyDownHandler);
+    }
+  };
+  pins.addEventListener('keydown', pinsKeyDownHandler);
+  pins.addEventListener('click', pinsClickHandler);
   mapPinMain.addEventListener('mousedown', pinMousedownHandler);
   mapPinMain.addEventListener('click', pinClickHandler);
 })();

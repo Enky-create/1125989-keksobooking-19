@@ -27,6 +27,10 @@
       house: 'Дом',
       palace: 'Дворец'
     };
+    var oldCard = map.querySelector('.map__card');
+    if (oldCard !== null) {
+      oldCard.remove();
+    }
     title.textContent = arrayPin[index].offer.title;
     price.textContent = arrayPin[index].offer.price + ' ₽/ночь';
     address.textContent = arrayPin[index].offer.address;
@@ -52,6 +56,7 @@
     }
     avatar.src = arrayPin[index].author.avatar;
     fragment.appendChild(cloneCard);
+
     map.insertBefore(fragment, cloneCard.querySelector('.map__filters-container'));
   };
   window.card = {
