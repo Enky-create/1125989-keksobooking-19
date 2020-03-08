@@ -41,16 +41,42 @@
     activate(fieldsets, filters);
     addressInput.value = x + ', ' + y;
   };
-
-  var mapClickHandler = function (evt) {
-    var target = evt.target;
-    var number = target.className.match(/number_/);
-    if (number) {
-      var index = target.className[number.index + 7];
-      window.card.show(parseInt(index, 10));
+  var crossClickHandler = function () {
+    var popup = map.querySelector('.popup');
+    var cross = map.querySelector('.popup__close');
+    popup.remove();
+    cross.removeEventListener('click', crossClickHandler);
+    document.removeEventListener('keydown', documentKeyDownHandler);
+  };
+  var documentKeyDownHandler = function (evt) {
+    if (evt.key === 'Escape') {
+      var popup = map.querySelector('.popup');
+      popup.remove();
+      document.removeEventListener('keydown', documentKeyDownHandler);
     }
   };
-  pins.addEventListener('click', mapClickHandler);
+  var pinsKeyDownHandler = function (evt) {
+    var target = evt.target;
+    if (evt.key === 'Enter') {
+      var index = target.children[0].dataset.indexNumber;
+      window.card.show(index);
+      var cross = map.querySelector('.popup__close');
+      cross.addEventListener('click', crossClickHandler);
+      document.addEventListener('keydown', documentKeyDownHandler);
+    }
+  };
+  var pinsClickHandler = function (evt) {
+    var target = evt.target;
+    if (target.tagName === 'IMG' && (target.parentElement.className.indexOf('map__pin--main') < 0)) {
+      var index = target.dataset.indexNumber;
+      window.card.show(index);
+      var cross = map.querySelector('.popup__close');
+      cross.addEventListener('click', crossClickHandler);
+      document.addEventListener('keydown', documentKeyDownHandler);
+    }
+  };
+  pins.addEventListener('keydown', pinsKeyDownHandler);
+  pins.addEventListener('click', pinsClickHandler);
   mapPinMain.addEventListener('mousedown', pinMousedownHandler);
   mapPinMain.addEventListener('click', pinClickHandler);
 })();
