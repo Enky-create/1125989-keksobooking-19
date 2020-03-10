@@ -30,7 +30,7 @@
       addressMainPin();
     };
     var mainPinMouseUpHandler = function () {
-      addressMainPin()
+      addressMainPin();
       document.removeEventListener('mousemove', mainPinMouseMoveHandler);
       window.removeEventListener('mouseup', mainPinMouseUpHandler);
     };
