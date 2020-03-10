@@ -32,13 +32,13 @@
 
   var pinMousedownHandler = function (evt) {
     if (evt.button === 0) {
-      activate(fieldsets, filters);
+      activate();
       addressInput.value = x + ', ' + y;
     }
   };
 
   var pinClickHandler = function () {
-    activate(fieldsets, filters);
+    activate();
     addressInput.value = x + ', ' + y;
   };
   var crossClickHandler = function () {
