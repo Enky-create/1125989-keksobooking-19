@@ -3,11 +3,6 @@
   var filters = document.querySelector('.map__filters');
   var fieldsets = document.querySelectorAll('fieldset');
   var mapPinMain = document.querySelector('.map__pin--main');
-  var addressInput = document.querySelector('#address');
-  var xString = mapPinMain.style.left.replace('px', '');
-  var yString = mapPinMain.style.top.replace('px', '');
-  var x = parseInt(xString, 10) + window.constant.MUFFIN_RADIUS;
-  var y = parseInt(yString, 10) + window.constant.MUFFIN_RADIUS;
   var map = document.querySelector('.map');
   var pins = document.querySelector('.map__pins');
   var activate = function () {
@@ -28,18 +23,18 @@
     filters.classList.remove('ad-form--disabled');
   };
 
-  y = y + window.constant.MUFFIN_TALE_HEIGHT + window.constant.MUFFIN_RADIUS;
-
   var pinMousedownHandler = function (evt) {
     if (evt.button === 0) {
-      activate(fieldsets, filters);
-      addressInput.value = x + ', ' + y;
+      activate();
+      mapPinMain.removeEventListener('click', pinClickHandler);
+      mapPinMain.removeEventListener('mousedown', pinMousedownHandler);
     }
   };
 
   var pinClickHandler = function () {
-    activate(fieldsets, filters);
-    addressInput.value = x + ', ' + y;
+    activate();
+    mapPinMain.removeEventListener('mousedown', pinMousedownHandler);
+    mapPinMain.removeEventListener('click', pinClickHandler);
   };
   var crossClickHandler = function () {
     var popup = map.querySelector('.popup');

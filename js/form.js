@@ -38,6 +38,8 @@
         price.setAttribute('min', '10000');
         price.setAttribute('placeholder', '10000');
         break;
+      default:
+        throw new Error('Неизвестный тип');
     }
   };
   var timeInChangeHandler = function () {

@@ -11,8 +11,8 @@
   var PINS_QUANTITY = 8;
   var MAX_Y = 630;
   var MIN_Y = 130;
-  var MIN_X = 25;
-  var MAX_X = document.querySelector('.map').offsetWidth - 25;
+  var MIN_X = 0;
+  var MAX_X = document.querySelector('.map').offsetWidth - 25 - MUFFIN_RADIUS;
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var CHECKIN_CHECKOUT = ['12:00', '13:00', '14:00'];
   var FEATURES = [
