@@ -26,11 +26,15 @@
   var pinMousedownHandler = function (evt) {
     if (evt.button === 0) {
       activate();
+      mapPinMain.removeEventListener('click', pinClickHandler);
+      mapPinMain.removeEventListener('mousedown', pinMousedownHandler);
     }
   };
 
-  var pinClickHandler = function (evt) {
+  var pinClickHandler = function () {
     activate();
+    mapPinMain.removeEventListener('mousedown', pinMousedownHandler);
+    mapPinMain.removeEventListener('click', pinClickHandler);
   };
   var crossClickHandler = function () {
     var popup = map.querySelector('.popup');
