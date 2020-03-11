@@ -29,10 +29,8 @@
     }
   };
 
-  var pinKeyDownHandler = function (evt) {
-    if (evt.key === 'Enter') {
-      activate();
-    }
+  var pinClickHandler = function (evt) {
+    activate();
   };
   var crossClickHandler = function () {
     var popup = map.querySelector('.popup');
@@ -71,5 +69,5 @@
   pins.addEventListener('keydown', pinsKeyDownHandler);
   pins.addEventListener('click', pinsClickHandler);
   mapPinMain.addEventListener('mousedown', pinMousedownHandler);
-  mapPinMain.addEventListener('keydown', pinKeyDownHandler);
+  mapPinMain.addEventListener('click', pinClickHandler);
 })();
