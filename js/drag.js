@@ -11,6 +11,12 @@
   };
   var mainPinMouseDownHandler = function (evt) {
     evt.preventDefault();
+    var realX;
+    var realY;
+    var minY = window.constant.MIN_Y;
+    var maxY = window.constant.MAX_Y;
+    var minX = window.constant.MIN_X;
+    var maxX = window.constant.MAX_X;
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -25,9 +31,13 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
-      mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-      addressMainPin();
+      realY = mapPinMain.offsetTop - shift.y;
+      realX = mapPinMain.offsetLeft - shift.x;
+      if (realY <= maxY && realY >= minY && realX <= maxX && realX >= minX) {
+        mapPinMain.style.top = realY + 'px';
+        mapPinMain.style.left = realX + 'px';
+        addressMainPin();
+      }
     };
     var mainPinMouseUpHandler = function () {
       addressMainPin();
