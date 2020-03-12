@@ -20,7 +20,6 @@
     }
 
     window.data.fillData();
-    pins.appendChild(window.pin.newPin(window.constant.PINS_QUANTITY));
     for (var b = 0; b < fieldsets.length; b++) {
       fieldsets[b].removeAttribute('disabled');
     }

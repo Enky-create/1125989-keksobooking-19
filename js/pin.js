@@ -1,7 +1,7 @@
 'use strict';
 (function () {
-  var pin = window.data.get();
   var newPin = function (counter) {
+    var pin = window.data.get();
     var htmlPin = document.querySelector('#pin').content.querySelector('button');
     htmlPin.setAttribute('tabindex', '0');
     var fragment = document.createDocumentFragment();

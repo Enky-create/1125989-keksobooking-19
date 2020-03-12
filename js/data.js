@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  var arrayPin = [];
+  var arrayPin;
   var getRandomInRange = function (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
@@ -52,10 +52,22 @@
     };
     return pin;
   };
+  var errorFill = function (message) {
+    var div = document.createElement('div');
+    var mapPins = document.querySelector('.map__pins');
+    div.textContent = message;
+    div.style.width = '100%';
+    div.style.background = 'red';
+    document.insertBefore(div, mapPins);
+  };
+  var succsessFill = function (serverAnswer) {
+    var pins = document.querySelector('.map__pins');
+    arrayPin = serverAnswer;
+    pins.appendChild(window.pin.newPin(window.constant.PINS_QUANTITY));
+  };
+
   var fillData = function () {
-    for (var a = 0; a < window.constant.PINS_QUANTITY; a++) {
-      arrayPin[a] = getRandomPin(a);
-    }
+    window.load(window.constant.URL, succsessFill, errorFill);
   };
   var get = function () {
     return arrayPin;

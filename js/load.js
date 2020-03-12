@@ -1,16 +1,13 @@
 'use strict';
 (function () {
-  var xhrErrorHandler = function (errorMesage) {
-    console.error(errorMesage);
-  };
-  window.load = function (url) {
+  window.load = function (url, xhrLoadHandler, xhrErrorHandler) {
     var xhr = new XMLHttpRequest();
-    xhr.responceType = 'json';
+    xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        return (xhr.responce);
+        xhrLoadHandler(xhr.response);
       } else {
-        xhrErrorHandler('Статус ответа ' + xhr.status + ' ' + xhr.statusText);
+        xhrErrorHandler('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
     xhr.addEventListener('error', function () {
