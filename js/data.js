@@ -1,61 +1,22 @@
 'use strict';
 (function () {
-  var arrayPin = [];
-  var getRandomInRange = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  var arrayPin;
+  var errorFill = function (message) {
+    var div = document.createElement('div');
+    var mapPins = document.querySelector('.map__pins');
+    div.textContent = message;
+    div.style.width = '100%';
+    div.style.background = 'red';
+    document.insertBefore(div, mapPins);
+  };
+  var succsessFill = function (serverAnswer) {
+    var pins = document.querySelector('.map__pins');
+    arrayPin = serverAnswer;
+    pins.appendChild(window.pin.newPin(window.constant.PINS_QUANTITY));
   };
 
-  var getRandomInArray = function (array) {
-    var min = 0;
-    var max = array.length - 1;
-    var index = getRandomInRange(min, max);
-    return array[index];
-  };
-
-  var getRandomArray = function (array) {
-    var length = getRandomInRange(1, array.length);
-    var newArray = [];
-    for (var i = 0; i < length; i++) {
-      newArray[i] = array[i];
-    }
-    return newArray;
-  };
-  var getRandomPin = function (index) {
-    index++;
-    var xMinus = 25;
-    var yMinus = 70;
-    var constant = window.constant;
-    var xCoordinate = getRandomInRange(constant.MIN_X, constant.MAX_X) - xMinus;
-    var yCoordinate = getRandomInRange(constant.MIN_Y, constant.MAX_Y) - yMinus;
-    var pin = {
-      author: {
-        avatar: 'img/avatars/user0' + index + '.png'
-      },
-      offer: {
-        title: 'Сдам',
-        address: xCoordinate + ' ,' + yCoordinate,
-        price: getRandomInRange(constant.MIN_PRICE, constant.MAX_PRICE),
-        type: getRandomInArray(constant.TYPES),
-        rooms: getRandomInRange(constant.MIN_ROOMS, constant.MAX_ROOMS),
-        guests: getRandomInRange(constant.MIN_GUESTS, constant.MAX_GUESTS),
-        checkin: getRandomInArray(constant.CHECKIN_CHECKOUT),
-        checkout: getRandomInArray(constant.CHECKIN_CHECKOUT),
-        features: getRandomArray(constant.FEATURES),
-        description: 'строка с описанием',
-        photos: getRandomArray(constant.PHOTO)
-      },
-
-      location: {
-        x: xCoordinate,
-        y: yCoordinate
-      }
-    };
-    return pin;
-  };
   var fillData = function () {
-    for (var a = 0; a < window.constant.PINS_QUANTITY; a++) {
-      arrayPin[a] = getRandomPin(a);
-    }
+    window.load(window.constant.URL, succsessFill, errorFill);
   };
   var get = function () {
     return arrayPin;
