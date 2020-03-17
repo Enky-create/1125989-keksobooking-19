@@ -13,8 +13,8 @@
     var popUp = successTemplate.cloneNode(true);
     var onSuccess = function () {
       document.querySelector('body').appendChild(popUp);
-      var popUpKeyDownHandler = function () {
-        if (evt.key === 'Esc') {
+      var popUpKeyDownHandler = function (keyEvt) {
+        if (keyEvt.key === 'Esc') {
           popUp.remove();
           document.removeEventListener('keydown', popUpKeyDownHandler);
         }
