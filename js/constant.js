@@ -1,6 +1,7 @@
 'use strict';
 (function () {
-  var URL = 'https://js.dump.academy/keksobooking/data';
+  var URLDownLoad = 'https://js.dump.academy/keksobooking/data';
+  var URLUpLoad = 'https://js.dump.academy/keksobooking';
   var MIN_GUESTS = 1;
   var MAX_GUESTS = 10;
   var MIN_ROOMS = 1;
@@ -30,7 +31,8 @@
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
   ];
   window.constant = {
-    URL: URL,
+    URLUpLoad: URLUpLoad,
+    URLDownLoad: URLDownLoad,
     MUFFIN_RADIUS: MUFFIN_RADIUS,
     MUFFIN_TALE_HEIGHT: MUFFIN_TALE_HEIGHT,
     PINS_QUANTITY: PINS_QUANTITY,

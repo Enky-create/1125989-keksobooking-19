@@ -20,4 +20,20 @@
     xhr.open('GET', url);
     xhr.send();
   };
+  window.upLoad = function (url, data, xhrUpLoadHandler, xhrErrorHandler) {
+    var xhr = new XMLHttpRequest();
+    xhr.responceType = 'json';
+    xhr.open('POST', url);
+    xhr.addEventListener('load', function () {
+      xhrUpLoadHandler(xhr.response);
+    });
+    xhr.addEventListener('error', function () {
+      xhrErrorHandler('Произошла ошибка соединения');
+    });
+    xhr.addEventListener('timeout', function () {
+      xhrErrorHandler('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
+    xhr.timeout = 10000;
+    xhr.send(data);
+  };
 })();
