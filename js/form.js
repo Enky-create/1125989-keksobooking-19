@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var reset = document.querySelector('.ad-form__reset');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
   var form = document.querySelector('.ad-form');
@@ -12,15 +13,18 @@
     var successTemplate = document.querySelector('#success').content;
     var popUp = successTemplate.cloneNode(true);
     var onSuccess = function () {
+      window.init.doInit();
       document.querySelector('body').appendChild(popUp);
       var popUpKeyDownHandler = function (keyEvt) {
-        if (keyEvt.key === 'Esc') {
-          popUp.remove();
+        if (keyEvt.key === 'Escape') {
+          var htmlPopUp = document.querySelector('.success');
+          htmlPopUp.remove();
           document.removeEventListener('keydown', popUpKeyDownHandler);
         }
       };
       var popUpClickHandler = function () {
-        popUp.remove();
+        var htmlPopUp = document.querySelector('.success');
+        htmlPopUp.remove();
         document.removeEventListener('click', popUpClickHandler);
       };
       document.addEventListener('keydown', popUpKeyDownHandler);
@@ -31,9 +35,19 @@
       var errorPopUp = errorTemplate.cloneNode(true);
       var errorButton = errorPopUp.querySelector('.error__button');
       var errorButtonClickHandler = function () {
-        errorPopUp.remove();
+        var htmlErrorPopUp = document.querySelector('.error');
+        htmlErrorPopUp.remove();
         errorButton.removeEventListener('click', errorButtonClickHandler);
       };
+      var errorKeyDownHandler = function (keyEvt) {
+        if (keyEvt.key === 'Escape') {
+          var htmlErrorPopUp = document.querySelector('.error');
+          htmlErrorPopUp.remove();
+          document.removeEventListener('keydown', errorKeyDownHandler);
+        }
+      };
+      document.addEventListener('click', errorButtonClickHandler);
+      document.addEventListener('keydown', errorKeyDownHandler);
       document.querySelector('body').appendChild(errorPopUp);
       errorButton.addEventListener('click', errorButtonClickHandler);
     };
@@ -77,6 +91,11 @@
   var timeOutChangeHandler = function () {
     timeIn.value = timeOut.value;
   };
+  var resetClickHandler = function (evt) {
+    evt.preventDefault();
+    form.reset();
+  };
+  reset.addEventListener('click', resetClickHandler);
   timeIn.addEventListener('change', timeInChangeHandler);
   timeOut.addEventListener('change', timeOutChangeHandler);
   form.addEventListener('submit', formSubmitHandler);
