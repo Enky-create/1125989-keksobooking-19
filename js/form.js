@@ -9,6 +9,35 @@
   var timeOut = document.querySelector('#timeout');
   var formSubmitHandler = function (evt) {
     evt.preventDefault();
+    var successTemplate = document.querySelector('#success').content;
+    var popUp = successTemplate.cloneNode(true);
+    var onSuccess = function () {
+      document.querySelector('body').appendChild(popUp);
+      var popUpKeyDownHandler = function (keyEvt) {
+        if (keyEvt.key === 'Esc') {
+          popUp.remove();
+          document.removeEventListener('keydown', popUpKeyDownHandler);
+        }
+      };
+      var popUpClickHandler = function () {
+        popUp.remove();
+        document.removeEventListener('click', popUpClickHandler);
+      };
+      document.addEventListener('keydown', popUpKeyDownHandler);
+      document.addEventListener('click', popUpClickHandler);
+    };
+    var onError = function () {
+      var errorTemplate = document.querySelector('#error').content;
+      var errorPopUp = errorTemplate.cloneNode(true);
+      var errorButton = errorPopUp.querySelector('.error__button');
+      var errorButtonClickHandler = function () {
+        errorPopUp.remove();
+        errorButton.removeEventListener('click', errorButtonClickHandler);
+      };
+      document.querySelector('body').appendChild(errorPopUp);
+      errorButton.addEventListener('click', errorButtonClickHandler);
+    };
+    window.upLoad(window.constant.URLUpLoad, new FormData(form), onSuccess, onError);
   };
 
   var capacityAndRoomnumberChangeHandler = function () {

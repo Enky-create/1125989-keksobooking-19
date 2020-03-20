@@ -16,7 +16,7 @@
   };
 
   var fillData = function () {
-    window.load(window.constant.URL, succsessFill, errorFill);
+    window.load(window.constant.URLDownLoad, succsessFill, errorFill);
   };
   var get = function () {
     return arrayPin;
