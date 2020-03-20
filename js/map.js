@@ -7,15 +7,8 @@
     var map = document.querySelector('.map');
     var pins = document.querySelector('.map__pins');
     var activate = function () {
-      debugger;
-      //var nested = document.querySelectorAll('.map__pin:not(.map__pin--main)');
       var form = document.querySelector('.ad-form');
-
       map.classList.remove('map--faded');
-      /*for (var i = 0; i < nested.length; i++) {
-        pins.removeChild(nested[i]);
-      }*/
-
       window.data.fillData();
       for (var b = 0; b < fieldsets.length; b++) {
         fieldsets[b].removeAttribute('disabled');
