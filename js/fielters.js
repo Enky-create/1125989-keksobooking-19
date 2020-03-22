@@ -38,6 +38,8 @@
         return false;
       }
       switch (filterPin.price) {
+        case 'any' :
+          break;
         case 'middle':
           if (price > 50000 || price < 10000) {
             return false;
@@ -56,10 +58,10 @@
         default:
           return true;
       }
-      if (filterPin.rooms !== 'any' && filterPin.rooms !== pin.offer.rooms) {
+      if (filterPin.rooms !== 'any' && (+filterPin.rooms) !== pin.offer.rooms) {
         return false;
       }
-      if (filterPin.guests !== 'any' && filterPin.guests !== pin.offer.guests) {
+      if (filterPin.guests !== 'any' && (+filterPin.guests )!== pin.offer.guests) {
         return false;
       }
       return filterPin.features.every(function (feature) {
