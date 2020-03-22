@@ -10,11 +10,9 @@
       var form = document.querySelector('.ad-form');
       map.classList.remove('map--faded');
       window.data.fillData();
-      //if (window.constant.LOAD_FLAG === true) {
-        for (var b = 0; b < fieldsets.length; b++) {
-          fieldsets[b].removeAttribute('disabled');
-        }
-      //}
+      for (var b = 0; b < fieldsets.length; b++) {
+        fieldsets[b].removeAttribute('disabled');
+      }
       form.classList.remove('ad-form--disabled');
       filters.classList.remove('ad-form--disabled');
     };
