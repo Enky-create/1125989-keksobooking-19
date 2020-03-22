@@ -7,12 +7,12 @@
     div.textContent = message;
     div.style.width = '100%';
     div.style.background = 'red';
-    document.insertBefore(div, mapPins);
+    document.querySelector('.map__pins').insertBefore(div, mapPins);
   };
   var succsessFill = function (serverAnswer) {
-    var pins = document.querySelector('.map__pins');
+    window.constant.LOAD_FLAG = true;
     arrayPin = serverAnswer;
-    pins.appendChild(window.pin.newPin(window.constant.PINS_QUANTITY));
+    window.filter(arrayPin);
   };
 
   var fillData = function () {
