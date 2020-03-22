@@ -1,11 +1,11 @@
 'use strict';
 (function () {
-  var newPin = function (counter) {
-    var pin = window.data.get();
+  var newPin = function (arrayPin) {
+    var pin = arrayPin;
     var htmlPin = document.querySelector('#pin').content.querySelector('button');
     htmlPin.setAttribute('tabindex', '0');
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < counter; i++) {
+    for (var i = 0; i < pin.length; i++) {
       var clonePin = htmlPin.cloneNode(true);
       var img = clonePin.querySelector('img');
       img.src = pin[i].author.avatar;

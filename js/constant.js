@@ -1,5 +1,7 @@
 'use strict';
 (function () {
+  var LOAD_FLAG = false;
+  var DEBOUNCE_INTERVAL = 500;
   var URLDownLoad = 'https://js.dump.academy/keksobooking/data';
   var URLUpLoad = 'https://js.dump.academy/keksobooking';
   var MIN_GUESTS = 1;
@@ -10,7 +12,7 @@
   var MAX_PRICE = 50000;
   var MUFFIN_RADIUS = 31;
   var MUFFIN_TALE_HEIGHT = 22;
-  var PINS_QUANTITY = 8;
+  var PINS_QUANTITY = 5;
   var MAX_Y = 630;
   var MIN_Y = 130;
   var MIN_X = 0;
@@ -31,6 +33,8 @@
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
   ];
   window.constant = {
+    DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
+    LOAD_FLAG: LOAD_FLAG,
     URLUpLoad: URLUpLoad,
     URLDownLoad: URLDownLoad,
     MUFFIN_RADIUS: MUFFIN_RADIUS,
