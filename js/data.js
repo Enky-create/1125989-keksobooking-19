@@ -12,7 +12,7 @@
   var succsessFill = function (serverAnswer) {
     window.constant.LOAD_FLAG = true;
     arrayPin = serverAnswer;
-    window.filter(arrayPin);
+    window.filters.doFilter(arrayPin);
   };
 
   var fillData = function () {

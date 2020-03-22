@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var filteredArray;
   var formFielters = document.querySelector('.map__filters');
   var pins = document.querySelector('.map__pins');
   var fielterCapacity = function (arrayPin, capacity) {
@@ -10,11 +11,17 @@
     for (var a = 0; a < nested.length; a++) {
       pins.removeChild(nested[a]);
     }
+    var popUp = document.querySelector('.map__card');
+    if (popUp) {
+      popUp.remove();
+    }
   };
+  var getFilteredArray = function () {
+    return filteredArray;
+  }
   var filter = function () {
     clear();
     var arrayPin = window.data.get();
-    var filteredArray;
     var filterPin = {
       type: formFielters.querySelector('select[name="housing-type"]').value,
       price: formFielters.querySelector('select[name="housing-price"]').value,
@@ -63,6 +70,9 @@
     pins.appendChild(window.pin.newPin(filteredArray));
   };
   formFielters.addEventListener('change', window.debounce(filter));
-  window.filter = filter;
+  window.filters = {
+    doFilter: filter,
+    getFilteredArray: getFilteredArray
+  };
 })();
 
