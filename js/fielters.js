@@ -18,7 +18,7 @@
   };
   var getFilteredArray = function () {
     return filteredArray;
-  }
+  };
   var filter = function () {
     clear();
     var arrayPin = window.data.get();
@@ -61,11 +61,11 @@
       if (filterPin.rooms !== 'any' && (+filterPin.rooms) !== pin.offer.rooms) {
         return false;
       }
-      if (filterPin.guests !== 'any' && (+filterPin.guests )!== pin.offer.guests) {
+      if (filterPin.guests !== 'any' && (+filterPin.guests) !== pin.offer.guests) {
         return false;
       }
       return filterPin.features.every(function (feature) {
-        return pin.offer.features.indexOf(feature) >= 0;
+        return pin.offer.features.indexOf(feature.value) >= 0;
       });
     });
     filteredArray = fielterCapacity(filteredArray, window.constant.PINS_QUANTITY);
