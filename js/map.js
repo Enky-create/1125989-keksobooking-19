@@ -1,20 +1,17 @@
 'use strict';
 (function () {
   var pins = document.querySelector('.map__pins');
-  var isActivePin = false;
+
   var removeActivePinClass = function () {
-    if (isActivePin === true) {
-      isActivePin = false;
-      var oldPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-      for (var i = 0; i < oldPins.length; i++) {
-        var isFind = false;
-        if (oldPins[i].className.indexOf('map__pin--active') >= 0) {
-          isFind = true;
-          oldPins[i].classList.remove('map__pin--active');
-        }
-        if (isFind) {
-          break;
-        }
+    var oldPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < oldPins.length; i++) {
+      var isFind = false;
+      if (oldPins[i].className.indexOf('map__pin--active') >= 0) {
+        isFind = true;
+        oldPins[i].classList.remove('map__pin--active');
+      }
+      if (isFind) {
+        break;
       }
     }
   };
@@ -25,7 +22,6 @@
     }
     var popUp = document.querySelector('.map__card');
     if (popUp) {
-      isActivePin = true;
       removeActivePinClass();
       popUp.remove();
     }
@@ -60,7 +56,6 @@
     var crossClickHandler = function () {
       var cross = map.querySelector('.popup__close');
       var popup = map.querySelector('.popup');
-      isActivePin = true;
       removeActivePinClass();
       popup.remove();
       document.removeEventListener('keydown', documentKeyDownHandler);
@@ -70,7 +65,6 @@
       var cross = map.querySelector('.popup__close');
       if (evt.key === 'Escape') {
         var popup = map.querySelector('.popup');
-        isActivePin = true;
         removeActivePinClass();
         popup.remove();
         cross.removeEventListener('click', crossClickHandler);
@@ -79,7 +73,6 @@
     };
     var pinsKeyDownHandler = function (evt) {
       var target = evt.target;
-      isActivePin = true;
       removeActivePinClass();
       if (evt.key === 'Enter') {
         target.classList.add('map__pin--active');
@@ -93,7 +86,6 @@
     var pinsClickHandler = function (evt) {
       var target = evt.target;
       if (target.tagName === 'IMG' && (target.parentElement.className.indexOf('map__pin--main') < 0)) {
-        isActivePin = true;
         removeActivePinClass();
         target.parentElement.classList.add('map__pin--active');
         var index = target.dataset.indexNumber;
