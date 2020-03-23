@@ -20,12 +20,14 @@
           var htmlPopUp = document.querySelector('.success');
           htmlPopUp.remove();
           document.removeEventListener('keydown', popUpKeyDownHandler);
+          document.removeEventListener('click', popUpClickHandler);
         }
       };
       var popUpClickHandler = function () {
         var htmlPopUp = document.querySelector('.success');
         htmlPopUp.remove();
         document.removeEventListener('click', popUpClickHandler);
+        document.removeEventListener('keydown', popUpKeyDownHandler);
       };
       document.addEventListener('keydown', popUpKeyDownHandler);
       document.addEventListener('click', popUpClickHandler);
@@ -37,12 +39,14 @@
       var errorButtonClickHandler = function () {
         var htmlErrorPopUp = document.querySelector('.error');
         htmlErrorPopUp.remove();
+        document.removeEventListener('keydown', errorKeyDownHandler);
         errorButton.removeEventListener('click', errorButtonClickHandler);
       };
       var errorKeyDownHandler = function (keyEvt) {
         if (keyEvt.key === 'Escape') {
           var htmlErrorPopUp = document.querySelector('.error');
           htmlErrorPopUp.remove();
+          errorButton.removeEventListener('click', errorButtonClickHandler);
           document.removeEventListener('keydown', errorKeyDownHandler);
         }
       };
@@ -93,7 +97,8 @@
   };
   var resetClickHandler = function (evt) {
     evt.preventDefault();
-    form.reset();
+    window.init.doInit();
+    window.map.clear();
   };
   reset.addEventListener('click', resetClickHandler);
   timeIn.addEventListener('change', timeInChangeHandler);

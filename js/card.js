@@ -6,7 +6,7 @@
     return element;
   };
   var show = function (index) {
-    var arrayPin = window.filters.getFilteredArray();
+    var pins = window.filters.getFilteredArray();
     var cardTemplate = document.querySelector('#card').content.querySelector('article');
     var cloneCard = cardTemplate.cloneNode(true);
     var title = cloneCard.querySelector('.popup__title');
@@ -31,30 +31,30 @@
     if (oldCard !== null) {
       oldCard.remove();
     }
-    title.textContent = arrayPin[index].offer.title;
-    price.textContent = arrayPin[index].offer.price + ' ₽/ночь';
-    address.textContent = arrayPin[index].offer.address;
-    type.textContent = englishTypeToRussian[arrayPin[index].offer.type];
-    textCapacity.textContent = arrayPin[index].offer.rooms + ' комнаты для ' + arrayPin[index].offer.guests + ' гостей';
-    time.textContent = 'Заезд после ' + arrayPin[index].offer.checkin + ', выезд до ' + arrayPin[index].offer.checkout;
-    description.textContent = arrayPin[index].offer.description;
+    title.textContent = pins[index].offer.title;
+    price.textContent = pins[index].offer.price + ' ₽/ночь';
+    address.textContent = pins[index].offer.address;
+    type.textContent = englishTypeToRussian[pins[index].offer.type];
+    textCapacity.textContent = pins[index].offer.rooms + ' комнаты для ' + pins[index].offer.guests + ' гостей';
+    time.textContent = 'Заезд после ' + pins[index].offer.checkin + ', выезд до ' + pins[index].offer.checkout;
+    description.textContent = pins[index].offer.description;
 
     featuresList.innerHTML = '';
-    for (var i = 0; i < arrayPin[index].offer.features.length; i++) {
-      var feature = getNewElement('li', 'popup__feature popup__feature--' + arrayPin[index].offer.features[i]);
+    for (var i = 0; i < pins[index].offer.features.length; i++) {
+      var feature = getNewElement('li', 'popup__feature popup__feature--' + pins[index].offer.features[i]);
       featuresList.appendChild(feature);
     }
 
     photo.innerHTML = '';
-    for (var a = 0; a < arrayPin[index].offer.photos.length; a++) {
+    for (var j = 0; j < pins[index].offer.photos.length; j++) {
       var image = getNewElement('img', 'popup__photo');
-      image.src = arrayPin[index].offer.photos[a];
+      image.src = pins[index].offer.photos[j];
       image.alt = 'Фотография жилья';
       image.width = 45;
       image.height = 40;
       photo.appendChild(image);
     }
-    avatar.src = arrayPin[index].author.avatar;
+    avatar.src = pins[index].author.avatar;
     fragment.appendChild(cloneCard);
 
     map.insertBefore(fragment, cloneCard.querySelector('.map__filters-container'));

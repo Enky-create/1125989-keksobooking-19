@@ -1,12 +1,12 @@
 'use strict';
 (function () {
   var mapPinMain = document.querySelector('.map__pin--main');
-  var addressMainPin = function () {
+  var getAddressMainPin = function () {
     var address = document.querySelector('#address');
     var xString = mapPinMain.style.left.replace('px', '');
     var yString = mapPinMain.style.top.replace('px', '');
     var x = parseInt(xString, 10) + window.constant.MUFFIN_RADIUS;
-    var y = parseInt(yString, 10) + window.constant.MUFFIN_RADIUS;
+    var y = parseInt(yString, 10) + window.constant.MUFFIN_RADIUS + window.constant.MUFFIN_TALE_HEIGHT;
     address.value = x + ' ,' + y;
   };
   var mainPinMouseDownHandler = function (evt) {
@@ -36,11 +36,11 @@
       if (realY <= maxY && realY >= minY && realX <= maxX && realX >= minX) {
         mapPinMain.style.top = realY + 'px';
         mapPinMain.style.left = realX + 'px';
-        addressMainPin();
+        getAddressMainPin();
       }
     };
     var mainPinMouseUpHandler = function () {
-      addressMainPin();
+      getAddressMainPin();
       document.removeEventListener('mousemove', mainPinMouseMoveHandler);
       window.removeEventListener('mouseup', mainPinMouseUpHandler);
     };

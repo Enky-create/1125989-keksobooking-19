@@ -10,10 +10,14 @@
     document.querySelector('.map__pins').insertBefore(div, mapPins);
   };
   var succsessFill = function (serverAnswer) {
-    arrayPin = serverAnswer;
     var filters = document.querySelector('.map__filters');
+    var selectFilters = filters.querySelectorAll('select');
+    arrayPin = serverAnswer;
     filters.classList.remove('ad-form--disabled');
     window.filters.doFilter(arrayPin);
+    selectFilters.forEach(function (select) {
+      select.removeAttribute('disabled', 'disabled');
+    });
   };
 
   var fillData = function () {

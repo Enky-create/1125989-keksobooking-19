@@ -12,8 +12,8 @@
   var MUFFIN_RADIUS = 31;
   var MUFFIN_TALE_HEIGHT = 22;
   var PINS_QUANTITY = 5;
-  var MAX_Y = 630;
-  var MIN_Y = 130;
+  var MAX_Y = 577;
+  var MIN_Y = 77;
   var MIN_X = 0;
   var MAX_X = document.querySelector('.map').offsetWidth - 25 - MUFFIN_RADIUS;
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];

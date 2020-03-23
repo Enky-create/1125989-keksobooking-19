@@ -1,14 +1,17 @@
 'use strict';
 (function () {
+  var check = function (xhr, doLoad, doError) {
+    if (xhr.status === 200) {
+      doLoad(xhr.response);
+    } else {
+      doError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
+    }
+  };
   window.load = function (url, xhrLoadHandler, xhrErrorHandler) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
-        xhrLoadHandler(xhr.response);
-      } else {
-        xhrErrorHandler('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
-      }
+      check(xhr, xhrLoadHandler, xhrErrorHandler);
     });
     xhr.addEventListener('error', function () {
       xhrErrorHandler('Произошла ошибка соединения');
@@ -25,7 +28,7 @@
     xhr.responceType = 'json';
     xhr.open('POST', url);
     xhr.addEventListener('load', function () {
-      xhrUpLoadHandler(xhr.response);
+      check(xhr, xhrUpLoadHandler, xhrErrorHandler);
     });
     xhr.addEventListener('error', function () {
       xhrErrorHandler('Произошла ошибка соединения');

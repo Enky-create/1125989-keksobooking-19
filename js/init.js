@@ -6,6 +6,7 @@
     var roomNumber = document.querySelector('#room_number');
     var capacity = document.querySelector('#capacity');
     var filters = document.querySelector('.map__filters');
+    var selectFilters = filters.querySelectorAll('select');
     var fieldsets = document.querySelectorAll('fieldset');
     map.className = 'map';
     map.classList.add('map--faded');
@@ -13,6 +14,9 @@
       fieldsets[i].setAttribute('disabled', 'disabled');
     }
     filters.classList.add('ad-form--disabled');
+    selectFilters.forEach(function (select) {
+      select.setAttribute('disabled', 'disabled');
+    });
     if (+roomNumber.value < +capacity.value) {
       roomNumber.setCustomValidity('Количество комнат не соответствует количеству гостей');
     }
