@@ -3,9 +3,6 @@
   var filteredPins = [];
   var formFielters = document.querySelector('.map__filters');
   var pins = document.querySelector('.map__pins');
-  /*var fielterCapacity = function (arrayPin, capacity) {
-    return arrayPin.slice(0, capacity);
-  };*/
   var getFilteredArray = function () {
     return filteredPins;
   };
