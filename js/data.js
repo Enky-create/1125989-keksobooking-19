@@ -10,9 +10,10 @@
     document.querySelector('.map__pins').insertBefore(div, mapPins);
   };
   var succsessFill = function (serverAnswer) {
-    window.constant.LOAD_FLAG = true;
     arrayPin = serverAnswer;
-    window.filter(arrayPin);
+    var filters = document.querySelector('.map__filters');
+    filters.classList.remove('ad-form--disabled');
+    window.filters.doFilter(arrayPin);
   };
 
   var fillData = function () {
