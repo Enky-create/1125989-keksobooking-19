@@ -1,6 +1,5 @@
 'use strict';
 (function () {
-  var LOAD_FLAG = false;
   var DEBOUNCE_INTERVAL = 500;
   var URLDownLoad = 'https://js.dump.academy/keksobooking/data';
   var URLUpLoad = 'https://js.dump.academy/keksobooking';
@@ -34,7 +33,6 @@
   ];
   window.constant = {
     DEBOUNCE_INTERVAL: DEBOUNCE_INTERVAL,
-    LOAD_FLAG: LOAD_FLAG,
     URLUpLoad: URLUpLoad,
     URLDownLoad: URLDownLoad,
     MUFFIN_RADIUS: MUFFIN_RADIUS,

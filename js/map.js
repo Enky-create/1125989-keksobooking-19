@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   var activateSite = function () {
-    var filters = document.querySelector('.map__filters');
     var fieldsets = document.querySelectorAll('fieldset');
     var mapPinMain = document.querySelector('.map__pin--main');
     var map = document.querySelector('.map');
@@ -14,7 +13,6 @@
         fieldsets[b].removeAttribute('disabled');
       }
       form.classList.remove('ad-form--disabled');
-      filters.classList.remove('ad-form--disabled');
     };
 
     var pinMousedownHandler = function (evt) {
