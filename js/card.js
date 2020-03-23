@@ -21,7 +21,7 @@
     var avatar = cloneCard.querySelector('.popup__avatar');
     var fragment = document.createDocumentFragment();
     var map = document.querySelector('.map');
-    var dictinary = {
+    var englishTypeToRussian = {
       flat: 'Квартира',
       bungalo: 'Бунгало',
       house: 'Дом',
@@ -34,7 +34,7 @@
     title.textContent = arrayPin[index].offer.title;
     price.textContent = arrayPin[index].offer.price + ' ₽/ночь';
     address.textContent = arrayPin[index].offer.address;
-    type.textContent = dictinary[arrayPin[index].offer.type];
+    type.textContent = englishTypeToRussian[arrayPin[index].offer.type];
     textCapacity.textContent = arrayPin[index].offer.rooms + ' комнаты для ' + arrayPin[index].offer.guests + ' гостей';
     time.textContent = 'Заезд после ' + arrayPin[index].offer.checkin + ', выезд до ' + arrayPin[index].offer.checkout;
     description.textContent = arrayPin[index].offer.description;
